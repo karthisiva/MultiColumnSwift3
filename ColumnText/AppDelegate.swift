@@ -13,9 +13,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    //    let temp = self.dataArray.count
+    //    newsArticleCount = self.dataArray.count
+    //    self.searchedDataArray = self.dataArray
+    //    var j = 5
+    //    while j < temp {
+    //        let dict = NSDictionary()
+    //        print("advertizement cell index value:\(j)")
+    //        self.dataArray.insert(dict as! [String:Any], at: j)
+    //        j = j + 6
+    //    }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+        let arrayValue = [1,2,3,4,5,6,7,8,9,0,12,23]
+        var j = 5
+        let temp = arrayValue.count
+        var totalSum = 0
+        while j < temp {
+            let indexValue = arrayValue[j]
+            totalSum = totalSum + indexValue
+            j = j + 6
+        }
+        print(totalSum)
         let str = "H"
         let att = (str.utf8Data?.attributedStringColumnWise!)! as NSAttributedString
         print(att)

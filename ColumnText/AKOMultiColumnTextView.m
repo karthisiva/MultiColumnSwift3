@@ -47,6 +47,47 @@
 
 #pragma mark -
 #pragma mark Init and dealloc
+- (void) longPress:(UILongPressGestureRecognizer *) gestureRecognizer {
+    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
+        CGPoint location = [gestureRecognizer locationInView:[gestureRecognizer view]];
+        UIMenuController *menuController = [UIMenuController sharedMenuController];
+        UIMenuItem *resetMenuItem = [[UIMenuItem alloc] initWithTitle:@"Item" action:@selector(menuItemClicked:)];
+        
+        NSAssert([self becomeFirstResponder], @"Sorry, UIMenuController will not work with %@ since it cannot become first responder", self);
+        [menuController setMenuItems:[NSArray arrayWithObject:resetMenuItem]];
+        [menuController setTargetRect:CGRectMake(location.x, location.y, 0.0f, 0.0f) inView:[gestureRecognizer view]];
+        [menuController setMenuVisible:YES animated:YES];
+    }
+}
+
+- (void) copy:(id) sender {
+    // called when copy clicked in menu
+    NSLog(@"copy");
+    
+}
+
+- (void) menuItemClicked:(id) sender {
+    // called when Item clicked in menu
+    NSLog(@"Meny item clicked");
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+    if (action == @selector(cut:))
+        return NO;
+    else if (action == @selector(copy:))
+        return YES;
+    else if (action == @selector(paste:))
+        return NO;
+    else if (action == @selector(select:) || action == @selector(selectAll:))
+        return YES;
+    else
+        return [super canPerformAction:action withSender:sender];
+}
+
+- (BOOL) canBecomeFirstResponder {
+    return YES;
+}
 
 - (void)setup
 {
@@ -69,6 +110,8 @@
     _topSpacing = 3.0;
     _lineSpacing = 1.0;
     _columnInset = CGPointMake(10.0, 10.0);
+    UILongPressGestureRecognizer *gr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+    [self addGestureRecognizer:gr];
 }
 
 - (id)initWithFrame:(CGRect)frame 
