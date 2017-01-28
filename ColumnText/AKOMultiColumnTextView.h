@@ -9,10 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <CoreText/CoreText.h>
 #import "AKOMultiColumnTextViewDataSource.h"
-
+#import "MagnifierView.h"
 @interface AKOMultiColumnTextView : UIView 
 {
+    NSTimer *touchTimer;
+    MagnifierView *loop;
+    BOOL isDragged;
 @private
+   
+    
     NSInteger _columnCount;
     UIFont *_font;
     NSString *_text;
@@ -56,6 +61,11 @@
 @property (nonatomic, assign) CGPoint           columnInset;
 
 @property (nonatomic, assign)     id <AKOMultiColumnTextViewDataSource> dataSource;
+
+@property (nonatomic, retain) UIScrollView *scrollView;
+@property (nonatomic, retain) NSTimer *touchTimer;
+- (void)addLoop;
+- (void)handleAction:(id)timerObj;
 
 @end
 

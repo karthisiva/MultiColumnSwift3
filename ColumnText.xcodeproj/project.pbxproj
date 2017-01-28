@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		409912361E3CAC7700A37C7C /* MagnifierView.m in Sources */ = {isa = PBXBuildFile; fileRef = 409912351E3CAC7700A37C7C /* MagnifierView.m */; };
 		40B957C31E30B1270036AC04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B957C21E30B1270036AC04 /* AppDelegate.swift */; };
 		40B957C51E30B1270036AC04 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B957C41E30B1270036AC04 /* ViewController.swift */; };
 		40B957C81E30B1270036AC04 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40B957C61E30B1270036AC04 /* Main.storyboard */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		409912341E3CAC7700A37C7C /* MagnifierView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagnifierView.h; sourceTree = "<group>"; };
+		409912351E3CAC7700A37C7C /* MagnifierView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagnifierView.m; sourceTree = "<group>"; };
 		40B957BF1E30B1270036AC04 /* ColumnText.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColumnText.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40B957C21E30B1270036AC04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40B957C41E30B1270036AC04 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +104,8 @@
 				40B957D81E30B1FC0036AC04 /* AKOMultiPageTextView.h */,
 				40B957D91E30B1FC0036AC04 /* AKOMultiPageTextView.m */,
 				40B957DA1E30B1FC0036AC04 /* AKOMultiColumnTextViewDataSource.h */,
+				409912341E3CAC7700A37C7C /* MagnifierView.h */,
+				409912351E3CAC7700A37C7C /* MagnifierView.m */,
 			);
 			name = MultiColumn;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 				40B957E21E30B21C0036AC04 /* NSString+BundleExtensions.m in Sources */,
 				40B957C31E30B1270036AC04 /* AppDelegate.swift in Sources */,
 				40B957DB1E30B1FC0036AC04 /* AKOMultiColumnTextView.m in Sources */,
+				409912361E3CAC7700A37C7C /* MagnifierView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -44,7 +44,7 @@
 @synthesize columnInset = _columnInset;
 
 @synthesize dataSource = _dataSource;
-
+@synthesize touchTimer;
 #pragma mark -
 #pragma mark Init and dealloc
 - (void) longPress:(UILongPressGestureRecognizer *) gestureRecognizer {
@@ -119,8 +119,8 @@
     _topSpacing = 3.0;
     _lineSpacing = 1.0;
     _columnInset = CGPointMake(10.0, 10.0);
-    UILongPressGestureRecognizer *gr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
-    [self addGestureRecognizer:gr];
+//    UILongPressGestureRecognizer *gr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+//    [self addGestureRecognizer:gr];
 }
 
 - (id)initWithFrame:(CGRect)frame 
@@ -160,6 +160,8 @@
     _text = nil;
     _font = nil;
     _color = nil;
+    loop = nil;
+
 }
 
 #pragma mark -
@@ -574,6 +576,59 @@
 - (void)setPage:(NSInteger)page
 {
     _page = page;
+}
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    self.touchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+                                                       target:self
+                                                     selector:@selector(addLoop)
+                                                     userInfo:nil
+                                                      repeats:NO];
+    
+    // just create one loop and re-use it.
+    if(loop == nil){
+        loop = [[MagnifierView alloc] init];
+        loop.viewToMagnify = self;
+    }
+    isDragged = false;
+    [[UIMenuController sharedMenuController]setMenuVisible:false];
+    [self.scrollView setScrollEnabled:false];
+    UITouch *touch = [touches anyObject];
+    loop.touchPoint = [touch locationInView:self];
+    [loop setNeedsDisplay];
+}
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    isDragged = true;
+    [self handleAction:touches];
+}
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.scrollView setScrollEnabled:true];
+    [self.touchTimer invalidate];
+    [loop removeFromSuperview];
+    if (isDragged == true){
+        isDragged = false;
+       [self addMenuItems];
+    }
+   
+    
+}
+
+- (void)addLoop {
+    // add the loop to the superview.  if we add it to the view it magnifies, it'll magnify itself!
+    [self.superview addSubview:loop];
+    // here, we could do some nice animation instead of just adding the subview...
+}
+
+- (void)handleAction:(id)timerObj {
+    NSSet *touches = timerObj;
+    UITouch *touch = [touches anyObject];
+    loop.touchPoint = [touch locationInView:self];
+    [loop setNeedsDisplay];
+}
+-(void)addMenuItems{
+    UIMenuController *menuController = [UIMenuController sharedMenuController];    
+    NSAssert([self becomeFirstResponder], @"Sorry, UIMenuController will not work with %@ since it cannot become first responder", self);
+    [menuController setTargetRect:CGRectMake(loop.touchPoint.x, loop.touchPoint.y, 0.0f, 0.0f) inView:self];
+    [menuController setMenuVisible:YES animated:YES];
 }
 
 @end

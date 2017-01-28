@@ -330,7 +330,7 @@
 
         currentPosition = view.finalIndex;
         iteration += 1;
-        
+        view.scrollView = self.scrollView;
         self.scrollView.contentSize = CGSizeMake(currentFrame.size.width * iteration, currentFrame.size.height);
         moreTextAvailable = view.moreTextAvailable;
     } 
