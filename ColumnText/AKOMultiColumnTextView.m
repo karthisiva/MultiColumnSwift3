@@ -65,7 +65,16 @@
     NSLog(@"copy");
     
 }
-
+- (void) select:(id) sender {
+    // called when copy clicked in menu
+    NSLog(@"selectAll");
+    
+}
+- (void) selectAll:(id) sender {
+    // called when copy clicked in menu
+    NSLog(@"selectAll");
+    
+}
 - (void) menuItemClicked:(id) sender {
     // called when Item clicked in menu
     NSLog(@"Meny item clicked");
